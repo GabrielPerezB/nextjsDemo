@@ -18,8 +18,18 @@ const DUMMY_MEETUPS = [
   },
 ];
 
-const HomePage = () => {
-  return <MeetupList meetups={DUMMY_MEETUPS} />;
+const HomePage = (props) => {
+  return <MeetupList meetups={props.meetups} />;
 };
+
+// this is for pre-render with async data
+export async function getStaticProps() {
+  //fetch data from an API
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS
+    }
+  };
+}
 
 export default HomePage;
