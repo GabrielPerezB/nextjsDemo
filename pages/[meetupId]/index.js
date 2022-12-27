@@ -1,47 +1,57 @@
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
-const MeetupDetails = () => {
+const MeetupDetails = (props) => {
   return (
     <MeetupDetail
-      image="https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg"
-      title="A First Meetup"
-      description="The meet description"
-      address="Some street 5, Some City"
+      image={props.meetupData.image}
+      title={props.meetupData.title}
+      description={props.meetupData.description}
+      address={props.meetupData.address}
     />
   );
 };
 
 // used on dynamic pages to tell nextJS for which dynamic parameter values this page should be pre-generated
 export async function getStaticPaths() {
+  // this is executed only on server-side
+  const client = await MongoClient.connect("mongodb://127.0.0.1:27017/meetups");
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+  client.close();
+
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "m1",
-        },
+    paths: meetups.map((meetup) => ({
+      params: {
+        meetupId: meetup._id.toString(),
       },
-      {
-        params: {
-          meetupId: "m2",
-        },
-      },
-    ],
+    })),
   };
 }
 
-export function getStaticProps(context) {
+export async function getStaticProps(context) {
   // fetch data for a single meetup
   const meetupId = context.params.meetupId;
+
+  // this is executed only on server-side
+  const client = await MongoClient.connect("mongodb://127.0.0.1:27017/meetups");
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: ObjectId(meetupId),
+  });
+  client.close();
+
   return {
     props: {
       meetupData: {
-        id: meetupId,
-        image:
-          "https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg",
-        title: "A First Meetup",
-        description: "The meet description",
-        address: "Some street 5, Some City",
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        image: selectedMeetup.image,
+        description: selectedMeetup.description,
       },
     },
   };
