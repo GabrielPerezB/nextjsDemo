@@ -1,3 +1,42 @@
+# NextJS
+
+* **Why Next.js?**:
+    - Is a full-featured React Framework for Production
+    - **Solves common problems** and makes building React apps **easier**
+    - Next.js Dependencies:
+        - React
+        - Node
+        - SWC & Babel
+        - Webpack
+    - Key features
+
+        |Built-in | Easy to add|
+        |--- | ---|
+        |Routing | Automated testing|
+        |Server-side rendering | Authentication|
+        |Static site generation | Much more...|
+        |TypeScript support | 
+        |Fast refresh and builds | 
+        |Automatic bundle splitting | 
+        |Automatic lazy loading | 
+        |Dynamic page titles / head tags | 
+
+    - What is Next.js Good For?
+        - Has versatile and flexible rendering and routing modules
+
+* **Key Features and Benefits**:
+    - Server-side Rendering:
+        - Automatic page pre-rendering: Greate for SEO and initial load
+        - Blending client-side and server-side: Fetch data on the server and render finished pages
+    - File-base Routing:
+        - Define pages and routes with files and folders instead of code
+        - Less code, less work, highly understandable concept
+    - Build Fullstack React Apps!
+        - Easily add backend(server-side) code to your Next/React apps
+        - Storing data, getting data, authentication etc. can be addded to your React projects
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
