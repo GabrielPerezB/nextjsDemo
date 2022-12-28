@@ -1,8 +1,16 @@
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 module.exports = (phase) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
+      images: {
+        remotePatterns: [
+          {
+            protocol: "https",
+            hostname: "**",
+          },
+        ],
+      },
       env: {
         mongodb_username: process.env.mongodb_username,
         mongodb_password: process.env.mongodb_password,
@@ -13,6 +21,14 @@ module.exports = (phase) => {
   }
 
   return {
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "**",
+        },
+      ],
+    },
     env: {
       mongodb_username: process.env.mongodb_username,
       mongodb_password: process.env.mongodb_password,
