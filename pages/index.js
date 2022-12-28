@@ -23,7 +23,9 @@ export async function getStaticProps() {
   //fetch data from an API ...
 
   // this is executed only on server-side
-  const client = await MongoClient.connect("mongodb+srv://why_pxd:qwerty123@why-closter.5t8jbvt.mongodb.net/meetups?retryWrites=true&w=majority");
+  const client = await MongoClient.connect(
+    `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.5t8jbvt.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`
+  );
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
   const meetups = await meetupsCollection.find().toArray();
