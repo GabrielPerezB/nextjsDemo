@@ -6,7 +6,7 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const data = req.body;
     const client = await MongoClient.connect(
-      "mongodb://127.0.0.1:27017/meetups"
+      "mongodb+srv://why_pxd:qwerty123@why-closter.5t8jbvt.mongodb.net/meetups?retryWrites=true&w=majority"
     );
     const db = client.db();
 

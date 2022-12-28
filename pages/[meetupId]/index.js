@@ -22,7 +22,7 @@ const MeetupDetails = (props) => {
 // used on dynamic pages to tell nextJS for which dynamic parameter values this page should be pre-generated
 export async function getStaticPaths() {
   // this is executed only on server-side
-  const client = await MongoClient.connect("mongodb://127.0.0.1:27017/meetups");
+  const client = await MongoClient.connect("mongodb+srv://why_pxd:qwerty123@why-closter.5t8jbvt.mongodb.net/meetups?retryWrites=true&w=majority");
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
   const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
@@ -43,7 +43,7 @@ export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
 
   // this is executed only on server-side
-  const client = await MongoClient.connect("mongodb://127.0.0.1:27017/meetups");
+  const client = await MongoClient.connect("mongodb+srv://why_pxd:qwerty123@why-closter.5t8jbvt.mongodb.net/meetups?retryWrites=true&w=majority");
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
   const selectedMeetup = await meetupsCollection.findOne({
